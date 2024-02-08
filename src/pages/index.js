@@ -1,2 +1,3 @@
 import LandingPage from "./LandingPage";
-export  {LandingPage};
+import Dashboard from "./dashboard";
+export  {LandingPage, Dashboard};

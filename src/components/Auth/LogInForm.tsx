@@ -15,32 +15,35 @@ export default function LogInForm() {
   const { storeCurrentUserDetails } = useUserDetails();
   const navigate = useNavigate();
 
+  const validationSchema = Yup.object({
+    email: Yup.string().required("Email is required"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(4, "Password must be at least 4 characters"),
+  });
+
+  const handleSubmit = async (values: { email: string; password: string }) => {
+    const userCredentials = logIn(values.email, values.password);
+    const userQueryResult = await whereQuery(
+      "users",
+      "userId",
+      "==",
+      (
+        await userCredentials
+      ).user.uid
+    );
+    storeCurrentUserDetails(userQueryResult[0] as User);
+    navigate(PagesPaths.DASHBOARD);
+  };
   const formik = useFormik({
     initialValues,
-    onSubmit: async (values ) => {
-      
-      const userCredentials = logIn(values.email, values.password);
-      const userQueryResult = await whereQuery(
-        "users",
-        "userId",
-        "==",
-        (
-          await userCredentials
-        ).user.uid
-      );
-      storeCurrentUserDetails(userQueryResult[0] as User);
-      navigate(PagesPaths.DASHBOARD);
-     
-    },
-    validationSchema: Yup.object({
-      email: Yup.string().required("Required"),
-      password: Yup.string().required("Required"),
-    }),
+    validationSchema,
+    validateOnChange:false,
+    onSubmit: handleSubmit,
   });
 
   return (
-           
-       <div>
+    <div>
       <form onSubmit={formik.handleSubmit}>
         <FormLabel>Email</FormLabel>
         <Input
@@ -66,7 +69,7 @@ export default function LogInForm() {
           <p style={{ color: "red" }}>{formik.errors.password}</p>
         ) : null}
 
-         <ButtonUI children="Login" type="submit"   /> 
+        <ButtonUI children="Login" type="submit" />
       </form>
     </div>
   );

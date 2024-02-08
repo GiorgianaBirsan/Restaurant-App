@@ -1,4 +1,4 @@
-import { Card, Stack, Heading, Image } from "@chakra-ui/react";
+import { Card, Stack, Heading, Image, CardProps } from "@chakra-ui/react";
 import ButtonUI from "../../components/UI/ButtonUI/ButtonUI";
 import ModalUI from "../../components/UI/ModalUI/ModalUI";
 import { useState } from "react";
@@ -22,19 +22,7 @@ export default function LandingPage() {
 
   return (
     <>
-      <Card
-        variant="elevated"
-        justify-content="center"
-        align-items="center"
-        w="100%"
-        m="auto"
-        mt="10%"
-        mb="auto"
-        direction="column"
-        alignItems="center"
-        p="50px"
-        shadow="xl"
-      >
+      <Card {...cardStyle}>
         <Heading as="h3" color="teal">
           Welcome to the Restaurant
         </Heading>
@@ -78,9 +66,21 @@ export default function LandingPage() {
             ? "Login to your account"
             : "Register your restaurant"
         }
-        children={modal.modalID === "login" ? <LogInForm  /> : <RegisterForm  />}//onClose={()=> !modal.isOpen}
-        
+        children={modal.modalID === "login" ? <LogInForm /> : <RegisterForm />} //onClose={()=> !modal.isOpen}
       />
     </>
   );
 }
+
+const cardStyle = {
+  justifyContent: "center",
+  alignItems: "center",
+  width: "100%",
+  margin: "auto",
+  marginTop: "10%",
+  marginBottom: "auto",
+  direction: "column",
+  padding: "50px",
+  variant: "elevated",
+  shadow: "xl",
+} as CardProps;
