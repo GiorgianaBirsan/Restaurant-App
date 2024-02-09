@@ -6,12 +6,6 @@ import RegisterForm from "../../components/Auth/RegisterForm";
 import LogInForm from "../../components/Auth/LogInForm";
 import { AuthModals } from "../../components/Auth/types";
 
-// type ModalAtributes = {
-//   modalID: AuthModals;
-//   isOpen: boolean;
-//   onClose: () => void;
-// };
-
 const modalAtributes = {
   modalID: "",
   isOpen: false,
@@ -66,7 +60,7 @@ export default function LandingPage() {
             ? "Login to your account"
             : "Register your restaurant"
         }
-        children={modal.modalID === "login" ? <LogInForm /> : <RegisterForm />} //onClose={()=> !modal.isOpen}
+        children={modal.modalID === "login" ? <LogInForm /> : <RegisterForm/> } //onClose={()=> !modal.isOpen}
       />
     </>
   );

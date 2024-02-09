@@ -1,4 +1,4 @@
-import { FormLabel, Input } from "@chakra-ui/react";
+import { FormLabel, Input, useToast } from "@chakra-ui/react";
 import ButtonUI from "../UI/ButtonUI/ButtonUI";
 import { useFormik } from "formik";
 import { useUserAuth } from "../../contexts/AuthContext";
@@ -8,12 +8,14 @@ import { whereQuery } from "../../configs/firebase/actions";
 import { useNavigate } from "react-router-dom";
 import { PagesPaths } from "../../pages/types";
 import { User } from "./types";
+
 const initialValues = { email: "", password: "" };
 
 export default function LogInForm() {
   const { logIn } = useUserAuth();
   const { storeCurrentUserDetails } = useUserDetails();
   const navigate = useNavigate();
+  const alert = useToast();
 
   const validationSchema = Yup.object({
     email: Yup.string().required("Email is required"),
@@ -23,22 +25,28 @@ export default function LogInForm() {
   });
 
   const handleSubmit = async (values: { email: string; password: string }) => {
-    const userCredentials = logIn(values.email, values.password);
-    const userQueryResult = await whereQuery(
-      "users",
-      "userId",
-      "==",
-      (
-        await userCredentials
-      ).user.uid
-    );
-    storeCurrentUserDetails(userQueryResult[0] as User);
-    navigate(PagesPaths.DASHBOARD);
+    try {
+      const userCredentials = logIn(values.email, values.password);
+
+      const userQueryResult = await whereQuery(
+        "users",
+        "userId",
+        "==",
+        (
+          await userCredentials
+        ).user.uid
+      );
+      storeCurrentUserDetails(userQueryResult[0] as User);
+
+      navigate(PagesPaths.DASHBOARD);
+    } catch (error) {
+      alert({ description: (error as Error).message, status: "error" });
+    }
   };
   const formik = useFormik({
     initialValues,
     validationSchema,
-    validateOnChange:false,
+    validateOnChange: false,
     onSubmit: handleSubmit,
   });
 

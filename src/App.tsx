@@ -5,10 +5,16 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { UserAuthContextProvider } from "./contexts/AuthContext";
 import Dashboard from "./pages/dashboard/Dashboard";
 
+
 function App() {
+ 
   return (
     <>
-      <ChakraProvider>
+      <ChakraProvider
+        toastOptions={{
+          defaultOptions: { position: "top", duration: 5000, isClosable: true },
+        }}
+      >
         <UserAuthContextProvider>
           <BrowserRouter>
             <Routes>
