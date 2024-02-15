@@ -1,10 +1,10 @@
 import { Card, Stack, Heading, Image } from "@chakra-ui/react";
-import ButtonUI from "../../components/ButtonUI/ButtonUI";
-import ModalUI from "../../components/ModalUI/ModalUI";
+import ButtonUI from "../../components/UI/ButtonUI/ButtonUI";
+import ModalUI from "../../components/UI/ModalUI/ModalUI";
 import { useState } from "react";
 import RegisterForm from "../../components/Auth/RegisterForm";
 import LogInForm from "../../components/Auth/LogInForm";
-import { AuthModals } from '../../components/Auth/types';
+import { AuthModals } from "../../components/Auth/types";
 
 // type ModalAtributes = {
 //   modalID: AuthModals;
@@ -49,13 +49,21 @@ export default function LandingPage() {
         <Stack gap="200px" direction="row">
           <ButtonUI
             onClick={() =>
-              setModal({ ...modal, modalID:AuthModals.LOGIN, isOpen: !modal.isOpen })
+              setModal({
+                ...modal,
+                modalID: AuthModals.LOGIN,
+                isOpen: !modal.isOpen,
+              })
             }
             children="Login"
           />
           <ButtonUI
             onClick={() =>
-              setModal({ ...modal, modalID: AuthModals.REGISTER, isOpen: !modal.isOpen })
+              setModal({
+                ...modal,
+                modalID: AuthModals.REGISTER,
+                isOpen: !modal.isOpen,
+              })
             }
             children="Register"
           />
@@ -70,7 +78,8 @@ export default function LandingPage() {
             ? "Login to your account"
             : "Register your restaurant"
         }
-        children={modal.modalID === "login" ? <LogInForm /> : <RegisterForm />}
+        children={modal.modalID === "login" ? <LogInForm  /> : <RegisterForm  />}//onClose={()=> !modal.isOpen}
+        
       />
     </>
   );

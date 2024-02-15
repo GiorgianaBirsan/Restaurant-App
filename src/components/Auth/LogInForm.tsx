@@ -1,16 +1,36 @@
 import { FormLabel, Input } from "@chakra-ui/react";
-import ButtonUI from "../ButtonUI/ButtonUI";
+import ButtonUI from "../UI/ButtonUI/ButtonUI";
 import { useFormik } from "formik";
-
+import { useUserAuth } from "../../contexts/AuthContext";
 import * as Yup from "yup";
-
+import useUserDetails from "../../hooks/UserDetailsHook";
+import { whereQuery } from "../../configs/firebase/actions";
+import { useNavigate } from "react-router-dom";
+import { PagesPaths } from "../../pages/types";
+import { User } from "./types";
 const initialValues = { email: "", password: "" };
 
-export default function LogInForm(){
+export default function LogInForm() {
+  const { logIn } = useUserAuth();
+  const { storeCurrentUserDetails } = useUserDetails();
+  const navigate = useNavigate();
+
   const formik = useFormik({
     initialValues,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values ) => {
+      
+      const userCredentials = logIn(values.email, values.password);
+      const userQueryResult = await whereQuery(
+        "users",
+        "userId",
+        "==",
+        (
+          await userCredentials
+        ).user.uid
+      );
+      storeCurrentUserDetails(userQueryResult[0] as User);
+      navigate(PagesPaths.DASHBOARD);
+     
     },
     validationSchema: Yup.object({
       email: Yup.string().required("Required"),
@@ -19,7 +39,8 @@ export default function LogInForm(){
   });
 
   return (
-    <div>
+           
+       <div>
       <form onSubmit={formik.handleSubmit}>
         <FormLabel>Email</FormLabel>
         <Input
@@ -45,7 +66,7 @@ export default function LogInForm(){
           <p style={{ color: "red" }}>{formik.errors.password}</p>
         ) : null}
 
-        <ButtonUI children="Login" type="submit" />
+         <ButtonUI children="Login" type="submit"   /> 
       </form>
     </div>
   );

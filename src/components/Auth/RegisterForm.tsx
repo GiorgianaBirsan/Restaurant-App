@@ -1,16 +1,20 @@
 import { FormLabel, Input, RadioGroup, Radio, HStack } from "@chakra-ui/react";
-import ButtonUI from "../ButtonUI/ButtonUI";
+import ButtonUI from "../UI/ButtonUI/ButtonUI";
 import { useFormik } from "formik";
 import { UserTypes } from "./types";
 import * as Yup from "yup";
+import { useUserAuth } from "../../contexts/AuthContext";
 
 const initialValues = { name: "", email: "", password: "", type: "" };
 
 export default function RegisterForm() {
+
+  const { signUp } = useUserAuth();
+
   const formik = useFormik({
     initialValues,
     onSubmit: (values) => {
-      console.log(values);
+      signUp(values.email, values.password, values.name, values.type);
     },
     validationSchema: Yup.object({
       name: Yup.string()
