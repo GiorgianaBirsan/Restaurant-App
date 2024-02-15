@@ -10,11 +10,11 @@ import { ReactNode, ReactPortal } from "react";
 import { createPortal } from "react-dom";
 
 export default function ModalUI(props: {
-  title: string;
-  children: ReactNode;
+  title?: string;
+  children?: ReactNode;
   isOpen: boolean;
   onClose: () => void;
-  modalID: string;
+  modalID?: string;
 }): ReactPortal | null {
   return createPortal(
     <div>

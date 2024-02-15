@@ -1,4 +1,4 @@
-import { FormLabel, Input } from "@chakra-ui/react";
+import { FormLabel, Input, useToast } from "@chakra-ui/react";
 import ButtonUI from "../UI/ButtonUI/ButtonUI";
 import { useFormik } from "formik";
 import { useUserAuth } from "../../contexts/AuthContext";
@@ -8,18 +8,26 @@ import { whereQuery } from "../../configs/firebase/actions";
 import { useNavigate } from "react-router-dom";
 import { PagesPaths } from "../../pages/types";
 import { User } from "./types";
+
 const initialValues = { email: "", password: "" };
 
 export default function LogInForm() {
   const { logIn } = useUserAuth();
   const { storeCurrentUserDetails } = useUserDetails();
   const navigate = useNavigate();
+  const alert = useToast();
 
-  const formik = useFormik({
-    initialValues,
-    onSubmit: async (values ) => {
-      
+  const validationSchema = Yup.object({
+    email: Yup.string().required("Email is required"),
+    password: Yup.string()
+      .required("Password is required")
+      .min(4, "Password must be at least 4 characters"),
+  });
+
+  const handleSubmit = async (values: { email: string; password: string }) => {
+    try {
       const userCredentials = logIn(values.email, values.password);
+
       const userQueryResult = await whereQuery(
         "users",
         "userId",
@@ -29,18 +37,21 @@ export default function LogInForm() {
         ).user.uid
       );
       storeCurrentUserDetails(userQueryResult[0] as User);
+
       navigate(PagesPaths.DASHBOARD);
-     
-    },
-    validationSchema: Yup.object({
-      email: Yup.string().required("Required"),
-      password: Yup.string().required("Required"),
-    }),
+    } catch (error) {
+      alert({ description: (error as Error).message, status: "error" });
+    }
+  };
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    validateOnChange: false,
+    onSubmit: handleSubmit,
   });
 
   return (
-           
-       <div>
+    <div>
       <form onSubmit={formik.handleSubmit}>
         <FormLabel>Email</FormLabel>
         <Input
@@ -66,7 +77,7 @@ export default function LogInForm() {
           <p style={{ color: "red" }}>{formik.errors.password}</p>
         ) : null}
 
-         <ButtonUI children="Login" type="submit"   /> 
+        <ButtonUI children="Login" type="submit" />
       </form>
     </div>
   );

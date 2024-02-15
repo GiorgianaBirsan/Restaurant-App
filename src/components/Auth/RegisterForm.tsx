@@ -1,30 +1,61 @@
-import { FormLabel, Input, RadioGroup, Radio, HStack } from "@chakra-ui/react";
+import {
+  FormLabel,
+  Input,
+  RadioGroup,
+  Radio,
+  HStack,
+  useToast,
+} from "@chakra-ui/react";
 import ButtonUI from "../UI/ButtonUI/ButtonUI";
 import { useFormik } from "formik";
 import { UserTypes } from "./types";
 import * as Yup from "yup";
 import { useUserAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { PagesPaths } from "../../pages/types";
 
 const initialValues = { name: "", email: "", password: "", type: "" };
 
 export default function RegisterForm() {
-
   const { signUp } = useUserAuth();
+  const alert = useToast();
+  const navigate = useNavigate();
+
+  const validationSchema = Yup.object({
+    name: Yup.string()
+      .required("Required")
+      .min(2, "Too short")
+      .max(30, "Too long"),
+    email: Yup.string().required("Required"),
+    password: Yup.string()
+      .required("Required")
+      .min(4, "Password must be at least 4 characters"),
+    type: Yup.string().required("Required"),
+  });
+
+  const handlesubmit = (values: {
+    email: string;
+    password: string;
+    name: string;
+    type: string;
+  }) => {
+    try {
+      signUp(values.email, values.password, values.name, values.type);
+      alert({ description: "Account created", status: "success" });
+      navigate(PagesPaths.DASHBOARD);
+    } catch (error) {
+      alert({
+        description: (error as Error).message,
+        status: "error",
+      });
+    }
+  };
 
   const formik = useFormik({
     initialValues,
-    onSubmit: (values) => {
-      signUp(values.email, values.password, values.name, values.type);
-    },
-    validationSchema: Yup.object({
-      name: Yup.string()
-        .required("Required")
-        .min(2, "Too short")
-        .max(30, "Too long"),
-      email: Yup.string().required("Required"),
-      password: Yup.string().required("Required"),
-      type: Yup.string().required("Required"),
-    }),
+    onSubmit: handlesubmit,
+    validationSchema,
+    validateOnChange: false,
   });
 
   return (
