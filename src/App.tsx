@@ -4,10 +4,9 @@ import LandingPage from "./pages/LandingPage/LandingPage";
 import { ChakraProvider } from "@chakra-ui/react";
 import { UserAuthContextProvider } from "./contexts/AuthContext";
 import Dashboard from "./pages/dashboard/Dashboard";
-
+import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
- 
   return (
     <>
       <ChakraProvider
@@ -19,7 +18,15 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<LandingPage />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+
+              <Route
+                path="/dashboard"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard />{" "}
+                  </ProtectedRoute>
+                }
+              />
             </Routes>
           </BrowserRouter>
         </UserAuthContextProvider>

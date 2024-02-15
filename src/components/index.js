@@ -1,3 +1,4 @@
 import ButtonUI from "./ButtonUI";
 import ModalUI from "./ModalUI/ModalUI";
-export {ButtonUI, ModalUI, }
+import LogoutButton from "./LogoutButton/LogoutButton";
+export {ButtonUI, ModalUI, LogoutButton}

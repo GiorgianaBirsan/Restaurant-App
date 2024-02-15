@@ -9,6 +9,7 @@ import { FC, ReactNode, createContext, useContext, useEffect, useState } from "r
 
 const logIn = async (email: string, password: string) =>
   signInWithEmailAndPassword(auth, email, password);
+  
 const logOut = async () => auth.signOut();
 
 const signUp = async (
