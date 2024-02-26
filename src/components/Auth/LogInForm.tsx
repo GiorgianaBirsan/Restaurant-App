@@ -12,6 +12,7 @@ import { User } from "./types";
 const initialValues = { email: "", password: "" };
 
 export default function LogInForm() {
+  
   const { logIn } = useUserAuth();
   const { storeCurrentUserDetails } = useUserDetails();
   const navigate = useNavigate();
