@@ -5,6 +5,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { UserAuthContextProvider } from "./contexts/AuthContext";
 import Dashboard from "./pages/dashboard/Dashboard";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import { CreateRestaurant } from "./pages";
 
 function App() {
   return (
@@ -18,12 +19,59 @@ function App() {
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<LandingPage />} />
-
               <Route
                 path="/dashboard"
                 element={
                   <ProtectedRoute>
-                    <Dashboard />{" "}
+                    <Dashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/create-restaurant"
+                element={
+                  <ProtectedRoute>
+                    <CreateRestaurant />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/manage-restaurant"
+                element={
+                  <ProtectedRoute>
+                    <CreateRestaurant />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/restaurant/:id"
+                element={
+                  <ProtectedRoute>
+                    <CreateRestaurant />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/restaurant/:id/edit"
+                element={
+                  <ProtectedRoute>
+                    <CreateRestaurant />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/restaurant"
+                element={
+                  <ProtectedRoute>
+                    <CreateRestaurant />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/restaurants"
+                element={
+                  <ProtectedRoute>
+                    <CreateRestaurant />
                   </ProtectedRoute>
                 }
               />
