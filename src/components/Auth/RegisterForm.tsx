@@ -6,13 +6,14 @@ import {
   HStack,
   useToast,
 } from "@chakra-ui/react";
-import ButtonUI from "../UI/ButtonUI/ButtonUI";
+import ButtonUI from "../UI/buttonUI/ButtonUI";
 import { useFormik } from "formik";
 import { UserTypes } from "./types";
 import * as Yup from "yup";
 import { useUserAuth } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { PagesPaths } from "../../pages/types";
+import "./../form/Form.css";
 
 const initialValues = { name: "", email: "", password: "", type: "" };
 
@@ -71,7 +72,7 @@ export default function RegisterForm() {
         />
 
         {formik.errors.name ? (
-          <p style={{ color: "red" }}>{formik.errors.name}</p>
+          <p className="error">{formik.errors.name}</p>
         ) : null}
 
         <FormLabel>Email</FormLabel>
@@ -83,7 +84,7 @@ export default function RegisterForm() {
           value={formik.values.email}
         />
         {formik.errors.email ? (
-          <p style={{ color: "red" }}>{formik.errors.email}</p>
+          <p className="error">{formik.errors.email}</p>
         ) : null}
 
         <FormLabel>Password</FormLabel>
@@ -95,7 +96,7 @@ export default function RegisterForm() {
           value={formik.values.password}
         />
         {formik.errors.password ? (
-          <p style={{ color: "red" }}>{formik.errors.password}</p>
+          <p className="error">{formik.errors.password}</p>
         ) : null}
 
         <RadioGroup defaultValue="" name="type" mt={5}>
@@ -109,7 +110,7 @@ export default function RegisterForm() {
           </HStack>
         </RadioGroup>
         {formik.errors.type ? (
-          <p style={{ color: "red" }}>{formik.errors.type}</p>
+          <p className="error">{formik.errors.type}</p>
         ) : null}
 
         <ButtonUI children="Create account" type="submit" />

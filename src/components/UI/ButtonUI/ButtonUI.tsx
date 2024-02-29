@@ -3,8 +3,7 @@ import {Button} from "@chakra-ui/react";
 
 export default function ButtonUI(props:{
   variant?: string, 
-  colorScheme?: string,
-  type?: string,
+  colorScheme?: string,type?: string,
   onClick?: () => void,
   children: string,
 }) {
