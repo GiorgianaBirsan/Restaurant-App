@@ -6,16 +6,25 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { ReactNode, ReactPortal } from "react";
+import { ReactNode, ReactPortal} from "react";
 import { createPortal } from "react-dom";
 
-export default function ModalUI(props: {
+export const modalAtributes = {
+  modalID: "",
+  isOpen: false,
+  onClose: ()=>{},
+};
+
+export function ModalUI(props: {
   title?: string;
   children?: ReactNode;
   isOpen: boolean;
   onClose: () => void;
   modalID?: string;
 }): ReactPortal | null {
+
+
+
   return createPortal(
     <div>
       <Modal isOpen={props.isOpen} onClose={props.onClose} isCentered>
@@ -30,3 +39,4 @@ export default function ModalUI(props: {
     document.getElementById("portal") as HTMLElement
   );
 }
+export default ModalUI;

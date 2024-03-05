@@ -5,7 +5,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { UserAuthContextProvider } from "./contexts/AuthContext";
 import Dashboard from "./pages/dashboard/Dashboard";
 import ProtectedRoute from "./utils/ProtectedRoute";
-import { CreateRestaurant } from "./pages";
+import { CreateRestaurant, DashboardCustomer, DashboardRestaurant } from "./pages";
 
 function App() {
   return (
@@ -39,7 +39,7 @@ function App() {
                 path="/manage-restaurant"
                 element={
                   <ProtectedRoute>
-                    <CreateRestaurant />
+                    <DashboardRestaurant />
                   </ProtectedRoute>
                 }
               />
@@ -47,7 +47,7 @@ function App() {
                 path="/restaurant/:id"
                 element={
                   <ProtectedRoute>
-                    <CreateRestaurant />
+                    <DashboardCustomer />
                   </ProtectedRoute>
                 }
               />
@@ -71,7 +71,7 @@ function App() {
                 path="/restaurants"
                 element={
                   <ProtectedRoute>
-                    <CreateRestaurant />
+                    <DashboardCustomer />
                   </ProtectedRoute>
                 }
               />

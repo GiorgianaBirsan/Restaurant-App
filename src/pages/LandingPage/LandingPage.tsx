@@ -7,12 +7,8 @@ import LogInForm from "../../components/Auth/LogInForm";
 import { AuthModals } from "../../components/Auth/types";
 import CardUI from "../../components/UI/cardUI/CardUI";
 import AppLogo from "../../components/UI/logo/AppLogo";
+import { modalAtributes } from "../../components/UI/modalUI/ModalUI";
 
-const modalAtributes = {
-  modalID: "",
-  isOpen: false,
-  onClose: () => {},
-};
 function LandingForm() {
   const [modal, setModal] = useState(modalAtributes);
   return (
