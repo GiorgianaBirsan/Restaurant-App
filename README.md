@@ -1,30 +1,35 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🍴 Restaurant App
 
-Currently, two official plugins are available:
+This is my Restaurant App project, showcasing my skills in web development and user interface design. The Restaurant App provides users with a seamless experience to explore restaurant menus, make reservations, and discover dining options.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies Used
 
-## Expanding the ESLint configuration
+-  🏷️ **HTML5**: Used for structuring the web pages.
+-  💫 **CSS3**: Employed for styling and layout design.
+- 💫💫**Chakra UI**: Chakra UI is used for designing and styling components, offering a comprehensive set of accessible and customizable UI elements.
+-  🚀 **Vite**: Vite is used as the build tool to provide a fast development experience with features like hot module replacement (HMR) and lightning-fast builds.
+-  🔥 **Firebase**: Firebase is utilized as the database to store user authentification, restaurant data, and user reservations.
+-  💭 **JavaScript (TypeScript)**: TypeScript is used for building the application logic, ensuring type safety and enhanced developer productivity.
+- 📄 **Formik**: Formik hook is used for managing forms across the project, providing a simpler and more efficient way to handle form validation and submission.
+- 🛣️  **React Router**: React Router is used for conditional navigation between different pages based on the logged-in user type (customer or restaurant owner).
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 📝 Note 
+Please note that this project is currently at the beginning stage, and there is a lot more in development. Stay tuned for exciting updates and new features coming soon!
 
-- Configure the top-level `parserOptions` property like this:
+## 🚀 About Me
+I am a motivated and detail-oriented junior front-end web developer with a passion for creating engaging user experiences. Proficient in HTML, CSS, JavaScript, and modern frontend frameworks, ReactJs. 
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 🖼️ Screenshots
+
+![image](https://github.com/GiorgianaBirsan/Restaurant-App/assets/64731577/f158f50e-ed55-4d80-ba4a-4993c966be18)
+## 
+![image](https://github.com/GiorgianaBirsan/Restaurant-App/assets/64731577/63d8add1-a7d8-41f2-82b8-b63e6dff0d51)
+## 
+![image](https://github.com/GiorgianaBirsan/Restaurant-App/assets/64731577/9d13a86e-d198-4142-96b2-206f90be1e13)
+## 
+![image](https://github.com/GiorgianaBirsan/Restaurant-App/assets/64731577/cecaa401-6740-44ba-aa24-53506346f723)
+
+
+
