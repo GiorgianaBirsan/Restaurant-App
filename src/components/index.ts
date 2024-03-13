@@ -1,9 +1,9 @@
-import ButtonUI from "./UI/buttonUI/ButtonUI";
-import ModalUI from "./UI/modalUI/ModalUI";
+import ButtonUI from "./UI/ButtonUI/ButtonUI";
+import ModalUI from "./UI/ModalUI/ModalUI";
 import LogoutButton from "./LogoutButton/LogoutButton";
-import CardUI from "./UI/cardUI/CardUI";
+import CardUI from "./UI/CardUI/CardUI";
 import AppLogo from "./UI/logo/AppLogo";
-import NavigateButton from "./UI/buttonUI/NavigateButton";
+import NavigateButton from "./UI/ButtonUI/NavigateButton";
 import { InputBox } from "./UI/inputUI";
 import { TextAreaUI } from "./UI/textAreaUI";
 import { RestaurantForm } from "./form";

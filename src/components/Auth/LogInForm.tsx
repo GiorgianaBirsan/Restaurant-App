@@ -1,5 +1,5 @@
 import { FormLabel, Input, useToast } from "@chakra-ui/react";
-import ButtonUI from "../UI/buttonUI/ButtonUI";
+import ButtonUI from "../UI/ButtonUI/ButtonUI";
 import { useFormik } from "formik";
 import { useUserAuth } from "../../contexts/AuthContext";
 import * as Yup from "yup";

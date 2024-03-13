@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavigateButton } from "../../components";
 import LogoutButton from "../../components/LogoutButton/LogoutButton";
-import CardUI from "../../components/UI/cardUI/CardUI";
+import CardUI from "../../components/UI/CardUI/CardUI";
 import AppLogo from "../../components/UI/logo/AppLogo";
 import useFetchRestaurant from "../../hooks/FetchRestaurantHook";
 import useUserDetails from "../../hooks/UserDetailsHook";
