@@ -1,3 +1,4 @@
+
 # 🍴 Restaurant App
 
 This is my Restaurant App project, showcasing my skills in web development and user interface design. The Restaurant App provides users with a seamless experience to explore restaurant menus, make reservations, and discover dining options.
