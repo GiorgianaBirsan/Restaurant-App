@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavigateButton } from "../../components";
 import LogoutButton from "../../components/LogoutButton/LogoutButton";
-import CardUI from "../../components/UI/cardUI/CardUI";
+import CardUI from "../../components/UI/CardUI/CardUI";
 import AppLogo from "../../components/UI/logo/AppLogo";
 import useFetchRestaurant from "../../hooks/FetchRestaurantHook";
 import useUserDetails from "../../hooks/UserDetailsHook";
@@ -11,10 +11,8 @@ export default function Dashboard() {
   const { getCurrentUserDetails } = useUserDetails();
   const currentUser = getCurrentUserDetails();
 
-  // const currentUserIsRestaurantOwner = currentUser?.type === "restaurant";
   const currentUserIsCustomer = currentUser?.type === "customer";
-
-  const getRestaurant = useFetchRestaurant();
+ const getRestaurant = useFetchRestaurant("userId", currentUser?.userId);
 
   const [action, setAction] = useState(
     currentUserIsCustomer
@@ -25,9 +23,11 @@ export default function Dashboard() {
       : null
   );
   useEffect(() => {
-    if (action) return;
-    getRestaurant("userId", currentUser.id).then((restaurant) => {
+    //if (action) return;
+
+    getRestaurant().then((restaurant) => {
       if (restaurant) {
+        
         setAction({
           path: PagesPaths.MANAGE_RESTAURANT,
           children: "Manage your restaurant",
@@ -39,7 +39,7 @@ export default function Dashboard() {
         });
       }
     });
-  });
+  },[currentUser]);
 
   if (!action) return <div>Loading...</div>;
   return (

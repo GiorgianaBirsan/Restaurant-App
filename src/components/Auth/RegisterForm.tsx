@@ -6,7 +6,7 @@ import {
   HStack,
   useToast,
 } from "@chakra-ui/react";
-import ButtonUI from "../UI/buttonUI/ButtonUI";
+import ButtonUI from "../UI/ButtonUI/ButtonUI";
 import { useFormik } from "formik";
 import { UserTypes } from "./types";
 import * as Yup from "yup";

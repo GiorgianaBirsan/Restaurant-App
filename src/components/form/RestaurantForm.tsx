@@ -1,9 +1,11 @@
 import { VStack, HStack, Image } from "@chakra-ui/react";
-import { ChangeEventHandler, useState } from "react";
-import { ButtonUI, CardUI, InputBox, ModalUI, TextAreaUI } from "..";
+import React, { ChangeEventHandler, useState } from "react";
+import { ButtonUI, InputBox, TextAreaUI } from "..";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import "./Form.css";
+import { useNavigate } from "react-router-dom";
+import { PagesPaths } from "../../pages/types";
 
 export interface formDataInterface {
   name: string;
@@ -26,9 +28,16 @@ const initialValues = {
   closeAt: "",
 };
 
-export default function RestaurantForm() {
+interface ChildProps {
+  handleCreateRestaurantSubmit: (data: formDataInterface) => void;
+}
+
+const RestaurantForm: React.FC<ChildProps> = ({
+  handleCreateRestaurantSubmit,
+}) => {
   const [files, setFiles] = useState<string[]>([]);
   const values = initialValues;
+  const navigate = useNavigate();
 
   const photoChangeHandler = (e: {
     target: { files: (Blob | MediaSource)[] };
@@ -42,10 +51,12 @@ export default function RestaurantForm() {
 
   const handleSubmit = (values: formDataInterface) => {
     try {
-      console.log("ALL VALUES FORMIK", values);
       files.length > 1
         ? (values.imageRef = files.join(","))
         : (values.imageRef = files[0]);
+
+      // this will pass the values to the parent component to be stored in firebase.
+      handleCreateRestaurantSubmit(values);
 
       formik.resetForm();
     } catch (error) {
@@ -179,9 +190,16 @@ export default function RestaurantForm() {
         </HStack>
         <HStack mt={5} w="500px" justifyContent="right">
           <ButtonUI children="Save restaurant" type="submit" />
-          <ButtonUI children="Cancel" type="button" variant="outline" />
+          <ButtonUI
+            children="Cancel"
+            type="button"
+            variant="outline"
+            onClick={() => navigate(PagesPaths.DASHBOARD)}
+          />
         </HStack>
       </form>
     </div>
   );
-}
+};
+
+export default RestaurantForm;

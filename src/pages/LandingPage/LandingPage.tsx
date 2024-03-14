@@ -1,18 +1,14 @@
 import { Stack } from "@chakra-ui/react";
-import ButtonUI from "../../components/UI/buttonUI/ButtonUI";
-import ModalUI from "../../components/UI/modalUI/ModalUI";
+import ButtonUI from "../../components/UI/ButtonUI/ButtonUI";
+import ModalUI from "../../components/UI/ModalUI/ModalUI";
 import { useState } from "react";
 import RegisterForm from "../../components/Auth/RegisterForm";
 import LogInForm from "../../components/Auth/LogInForm";
 import { AuthModals } from "../../components/Auth/types";
-import CardUI from "../../components/UI/cardUI/CardUI";
+import CardUI from "../../components/UI/CardUI/CardUI";
 import AppLogo from "../../components/UI/logo/AppLogo";
+import { modalAtributes } from "../../components/UI/ModalUI/ModalUI";
 
-const modalAtributes = {
-  modalID: "",
-  isOpen: false,
-  onClose: () => {},
-};
 function LandingForm() {
   const [modal, setModal] = useState(modalAtributes);
   return (

@@ -1,4 +1,4 @@
-import ButtonUI from "../UI/buttonUI/ButtonUI";
+import ButtonUI from "../UI/ButtonUI/ButtonUI";
 import { useNavigate } from "react-router-dom";
 import { PagesPaths } from "../../pages/types";
 import { useUserAuth } from "../../contexts/AuthContext";

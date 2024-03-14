@@ -3,25 +3,26 @@ import { RestaurantForm } from "../../components";
 import { formDataInterface } from "../../components/form/RestaurantForm";
 import { add } from "../../configs/firebase/actions";
 import useUserDetails from "../../hooks/UserDetailsHook";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import useFetchRestaurant from "../../hooks/FetchRestaurantHook";
+
 
 export default function CreateRestaurant() {
   const { getCurrentUserDetails } = useUserDetails();
-  const {  userId } = getCurrentUserDetails();
- const restaurant = useFetchRestaurant("userId", userId);
- const navigate = useNavigate();
+  const { userId } = getCurrentUserDetails();
+  const restaurant = useFetchRestaurant("userId", userId);
+  const navigate = useNavigate();
 
-  const submitHandler = (formData: formDataInterface) => {
+  const submitRestaurantFormHandler = (formData: formDataInterface) => {
     add("restaurants", { ...formData, userId }).then(() => {
-      navigate("/dashboard")
+      navigate("/dashboard");
     });
   };
 
-  return (
+    return (
     <div>
       <Heading mb={50}>Register your business</Heading>
-      <RestaurantForm />
+      <RestaurantForm  handleCreateRestaurantSubmit ={submitRestaurantFormHandler} />
     </div>
   );
 }
